@@ -1,0 +1,53 @@
+game:GetService("Players").LocalPlayer:GetMouse().Button1Down:connect(function()
+    if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then
+        return
+    end
+    if not game:GetService("Players").LocalPlayer:GetMouse().Target then
+        return
+    end
+    game:GetService("Players").LocalPlayer:GetMouse().Target.CanCollide = not game:GetService("Players").LocalPlayer:GetMouse().Target.CanCollide
+end)
+
+local isTyping = false
+
+game:GetService("UserInputService").TextBoxFocused:Connect(function()
+    if isTyping == false then
+        isTyping = true
+    elseif isTyping == true then
+        print("How did this even manage to happen")
+    else
+        isTyping = true
+    end
+end)
+
+game:GetService("UserInputService").TextBoxFocusReleased:Connect(function()
+    if isTyping == true then
+        isTyping = false
+    elseif isTyping == false then
+        print("How did this even manage to happen")
+    else
+        isTyping = false
+    end
+end)
+
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    keyPressed = input.KeyCode
+    if keyPressed == Enum.KeyCode.U and isTyping == false then
+        if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
+            game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+        end
+    end
+end)
+
+game:GetService("Players").LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+    if game:GetService("Players").LocalPlayer.Character.Humanoid.Health == 0 then
+        wait()
+        if game:GetService("StarterGui"):GetCoreGuiEnabled("Chat") == false then
+            game:GetService("StarterGui"):SetCoreGuiEnabled("Chat", true)
+        end
+    end
+end)
+
+game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
+
+syn.queue_on_teleport("loadstring(game:HttpGet(''))()")
