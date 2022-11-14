@@ -50,4 +50,4 @@ end)
 
 game:GetService("StarterGui"):SetCore("ResetButtonCallback", true)
 
-syn.queue_on_teleport("wait(10);loadstring(game:HttpGet('https://raw.githubusercontent.com/SnapSkullYT/dsfasdfas/main/e.txt'))()")
+syn.queue_on_teleport("wait(10);print('fuck you it loaded shithead');loadstring(game:HttpGet('https://raw.githubusercontent.com/SnapSkullYT/dsfasdfas/main/e.txt'))()")
